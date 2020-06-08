@@ -16,7 +16,7 @@ router.post('/register',
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-                return res.status(400).jsom({
+                return res.status(400).json({
                     errors: errors.array(),
                     message: 'Incorrect registration data'
                 })
@@ -30,7 +30,7 @@ router.post('/register',
                 return res.status(400).json({ message: 'User already exists...' })
             }
 
-            const hashedPassword = bcrypt.hash(password, 12)
+            const hashedPassword = await bcrypt.hash(password, 10)
 
             const user = new User({ email, password: hashedPassword })
 
@@ -53,7 +53,7 @@ router.post('/login',
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-                return res.status(400).jsom({
+                return res.status(400).json({
                     errors: errors.array(),
                     message: 'Incorrect Log In data'
                 })
