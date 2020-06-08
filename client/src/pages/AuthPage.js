@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useHttp } from '../hooks/http.hook';
 
 export const AuthPage = () => {
+    const { loading, request } = useHttp();
 
     const [form, setForm] = useState({
         email: '',
@@ -12,6 +14,15 @@ export const AuthPage = () => {
             ...form,
             [event.target.name]: event.target.value
         })
+    }
+
+    const registerHandler = async () => {
+        try {
+            const data = await request('/api/auth/register', 'POST', { ...form });
+            console.log('Data', data)
+        } catch (e) {
+
+        }
     }
 
     return (
@@ -49,9 +60,21 @@ export const AuthPage = () => {
                     </div>
                     <div className="card-action">
                         {/* remove hard-code marginRight */}
-                        <button className="btn yellow darken-4" style={{ marginRight: 10 }}>Log In</button>
+                        <button
+                            className="btn yellow darken-4"
+                            style={{ marginRight: 10 }}
+                            disabled={loading}
+                        >
+                            Log In
+                        </button>
 
-                        <button className="btn grey lighten-1 black-text">Sign Up</button>
+                        <button
+                            className="btn grey lighten-1 black-text"
+                            onClick={registerHandler}
+                            disabled={loading}
+                        >
+                            Sign Up
+                        </button>
                     </div>
                 </div>
             </div>
