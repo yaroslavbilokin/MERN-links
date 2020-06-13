@@ -13,11 +13,11 @@ export const Navbar = () => {
 
     return (
         <nav>
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo">Logo</a>
+            <div class="nav-wrapper blue darken-1" style={{ padding: '0 2rem' }}>
+                <a href="/" class="brand-logo">Logo</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><NavLink href="/create">Create</NavLink></li>
-                    <li><NavLink href="/links">Create</NavLink></li>
+                    <li><NavLink to="/create">Create</NavLink></li>
+                    <li><NavLink to="/links">Links</NavLink></li>
                     <li><a href="/" onClick={logoutHandler}>Logout</a></li>
                 </ul>
             </div>
